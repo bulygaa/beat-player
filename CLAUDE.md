@@ -35,10 +35,12 @@ Everything visible is a pure function of `(beats, now - startedAt)`, computed du
 - Additional markdown files. The repo has exactly three: CLAUDE.md, PLAN.md, README.md.
 
 ## Allowed state
-- `usePlayhead` holds two numbers: `startedAt` (persisted to localStorage) and `now` (the latest `Date.now()`
-  sample, set once per animation frame). Both start as `null`, so the server render and the first client render
-  are identical.
+- `usePlayhead` reads two numbers: `startedAt` (from the localStorage-backed store in `storage.ts`, through
+  `useSyncExternalStore`) and `now` (the latest `Date.now()` sample, set once per animation frame). Both are `null`
+  on the server and during hydration, so the server render and the first client render are identical.
 - Only two things write `startedAt`: first visit (no valid stored value) and Replay.
+- While `startedAt` is unknown, the UI asserts no position: no beat, counter, timecode or track. A zeroed
+  placeholder reads as a restart. Placeholder elements keep their space so nothing shifts when the frame lands.
 
 ## Layering
 Imports only go downward: `app → ui → playhead → film`.

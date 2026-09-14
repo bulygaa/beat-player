@@ -1,0 +1,22 @@
+/* The one frame that both the player and the refusal render in. */
+.frame {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  background: var(--stage);
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.body {
+  align-self: center;
+  padding-inline: clamp(20px, 7cqi, 72px);
+}
+
+@media (max-width: 640px) {
+  .frame {
+    aspect-ratio: 4 / 5;
+  }
+}

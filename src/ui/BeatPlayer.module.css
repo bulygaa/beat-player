@@ -1,0 +1,91 @@
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 3.5rem;
+  padding-inline: 24px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/*
+ * The one transition: fade through black with a short rise. --reveal is written every frame from the playhead,
+ * so there is deliberately no `transition` or `@keyframes` here. Those run on the element's own timeline and
+ * would replay from zero after a refresh mid-beat.
+ */
+.stage {
+  opacity: var(--reveal);
+  transform: translateY(calc((1 - var(--reveal)) * 12px));
+}
+
+.title {
+  max-width: 18ch;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.75rem, 5.5cqi, 3.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+
+.text {
+  max-width: 42ch;
+  margin-top: 1.1em;
+  font-size: clamp(0.95rem, 1.9cqi, 1.1875rem);
+  line-height: 1.5;
+  text-wrap: pretty;
+  color: var(--ink-soft);
+}
+
+.replay {
+  padding: 0.5rem 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.replay:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.track {
+  display: flex;
+  gap: 4px;
+  padding: 0 24px 24px;
+}
+
+.segment {
+  position: relative;
+  height: 2px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  background: var(--ink);
+}
+
+/* No position is known yet, so no progress is shown. `visibility` keeps the track's space. */
+[aria-busy="true"] .track {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage {
+    transform: none;
+  }
+}
