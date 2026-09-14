@@ -4,7 +4,7 @@ A 30-second silent film in one auto-playing widget. The beats are data (`{ title
 plays only from that array. As an implementation choice, the current beat isn't stored: each frame derives it from
 `Date.now() - startedAt`.
 
-**Live:** _URL added after deploy_
+**Live:** https://beat-player-one.vercel.app/
 
 ## Check it in 60 seconds
 
